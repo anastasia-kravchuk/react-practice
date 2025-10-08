@@ -17,6 +17,13 @@ const products = productsFromServer.map(product => {
   };
 });
 
+const TABLE_COLUMNS = [
+  { key: 'id', title: 'ID' },
+  { key: 'name', title: 'Product' },
+  { key: 'category', title: 'Category' },
+  { key: 'user', title: 'User' },
+];
+
 export const App = () => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -174,49 +181,9 @@ export const App = () => {
             >
               <thead>
                 <tr>
-                  <th>
-                    <span className="is-flex is-flex-wrap-nowrap">
-                      ID
-                      <a href="#/">
-                        <span className="icon">
-                          <i data-cy="SortIcon" className="fas fa-sort" />
-                        </span>
-                      </a>
-                    </span>
-                  </th>
-
-                  <th>
-                    <span className="is-flex is-flex-wrap-nowrap">
-                      Product
-                      <a href="#/">
-                        <span className="icon">
-                          <i data-cy="SortIcon" className="fas fa-sort-down" />
-                        </span>
-                      </a>
-                    </span>
-                  </th>
-
-                  <th>
-                    <span className="is-flex is-flex-wrap-nowrap">
-                      Category
-                      <a href="#/">
-                        <span className="icon">
-                          <i data-cy="SortIcon" className="fas fa-sort-up" />
-                        </span>
-                      </a>
-                    </span>
-                  </th>
-
-                  <th>
-                    <span className="is-flex is-flex-wrap-nowrap">
-                      User
-                      <a href="#/">
-                        <span className="icon">
-                          <i data-cy="SortIcon" className="fas fa-sort" />
-                        </span>
-                      </a>
-                    </span>
-                  </th>
+                  {TABLE_COLUMNS.map(column => (
+                    <th key={column.key}>{column.title}</th>
+                  ))}
                 </tr>
               </thead>
 
@@ -228,6 +195,7 @@ export const App = () => {
                     </td>
 
                     <td data-cy="ProductName">{product.name}</td>
+
                     <td data-cy="ProductCategory">
                       {product.category.icon} - {product.category.title}
                     </td>
